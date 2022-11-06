@@ -28,6 +28,7 @@ excavator是一款基于mitmproxy的插件式被动安全漏洞扫描器，此�
 - [ ] 越权检测
 # 使用方式
 ```python
+# 首次使用安装依赖
 pip3 install -r requirements.txt
 # 开启反连平台，可检测SSRF(可选)，反连平台这里使用的是w13scan的反连平台
 python3 reverse.py

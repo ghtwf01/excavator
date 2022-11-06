@@ -1,6 +1,6 @@
 import random
 from urllib import parse
-import string
+import platform
 import os
 
 

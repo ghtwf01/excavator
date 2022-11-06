@@ -48,4 +48,6 @@ vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/repor
 - [ ] 增加用户自定义参数，如指定检测模块、自定义监听端口等
 - [ ] 增加代理扫描
 - [ ] 增加excavator的检测插件
-
+# 参考&致谢
+https://github.com/w-digital-scanner/w13scan
+https://github.com/amcai/myscan

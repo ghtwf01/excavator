@@ -40,8 +40,10 @@ python3 excavator.py
 vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/report/res_example.txt
 # 证书安装
 如果需要导入证书，在启动excavator.py后开启浏览器代理访问http://mitm.it ，下载对应操作系统下的证书即可
+![pem](https://user-images.githubusercontent.com/56472384/200172366-d6a5a83e-e3af-4574-a97b-465a7547dfd7.png)
 # 优化todo
 - [ ] html报告输出
 - [ ] 增加用户自定义参数，如指定检测模块、自定义监听端口等
 - [ ] 增加代理扫描
 - [ ] 增加excavator的检测插件
+

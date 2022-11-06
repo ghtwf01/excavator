@@ -36,7 +36,7 @@ python3 excavator.py
 # 更多联动方式可参考xray文档：https://docs.xray.cool/#/scenario/burp
 ```
 启动后会开启本地8080端口监听，代理流量进8080端口即可
-报告vulnweb输出测试可见：https://github.com/ghtwf01/excavator/blob/main/report/res_example.txt
+vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/report/res_example.txt
 # 优化todo
 - [ ] html报告输出
 - [ ] 增加用户自定义参数，如指定检测模块、自定义监听端口等

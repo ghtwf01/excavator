@@ -1,5 +1,5 @@
 from lib.core.spiderset import *
-from scanners.PerFile.information_disclosure import check_information_disclosure
+from scanners.PerFile.information_disclosure import Information_Check
 from lib.core.common import get_content_type
 class Information_disclosure:
     def __init__(self):
@@ -24,4 +24,4 @@ class Information_disclosure:
         response = flow.response
         content_type = get_content_type(response)
         if "application/xml" in content_type or "application/json" in content_type:
-            check_information_disclosure(str(response.text), self.url, self.method, self.body)
+            Information_Check().check_information_disclosure(str(response.text), self.url, self.method, self.body)

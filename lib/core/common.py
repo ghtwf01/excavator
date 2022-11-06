@@ -72,7 +72,7 @@ Body:%s
 Vuln_type:%s
 Level:%s
 \033[0m
-        ''') % (method, url, body.strip(), vuln_type, level)
+        ''') % (method, url, str(body).strip(), vuln_type, level)
     print(msg.strip())
     with open("report/res.txt", "a") as file:
         file.write(msg.strip().strip("\033[0m").strip("\033[31m")+"\n")

@@ -72,7 +72,7 @@ class SQLI:
                     requests.get(url1)
                     end_time = time.time()
                     payload_time = end_time - start_time
-                    print("payload耗时："+str(end_time-start_time))
+                    # print("payload耗时："+str(end_time-start_time))
                     if payload_time > 2:
                         max_common_time = self.max_time(url)
                         if payload_time > max_common_time:

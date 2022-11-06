@@ -11,6 +11,9 @@ def check_url_direct(request):
             if "https://" in value[0] or "http://" in value[0] or key.lower() in ssrf_or_redirect_params:
                 url1 = get_replaced_url(url, dict[key][0], redirect_url)
                 headers = requests.get(url1, allow_redirects=False).headers
-                if headers["Location"] == "https://example.com":
-                    print("[+] " + url1 + " url redirect exists")
-                    vuln_print(url1, "url_redirect", vuln_level["url_redirect"], request.method)
+                try:
+                    if headers["Location"] == "https://example.com":
+                        print("[+] " + url1 + " url redirect exists")
+                        vuln_print(url1, "url_redirect", vuln_level["url_redirect"], request.method)
+                except:
+                    pass

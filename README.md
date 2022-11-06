@@ -1,5 +1,5 @@
-![img1](https://socialify.git.ci/ghtwf01/excavator/image?description=1&font=Raleway&forks=1&issues=1&language=1&owner=1&pattern=Signal&stargazers=1&theme=Light)
-https://socialify.git.ci/ghtwf01/excavator/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Plus&stargazers=1&theme=Light
+![excavator](https://socialify.git.ci/ghtwf01/excavator/image?description=1&font=Raleway&forks=1&issues=1&language=1&owner=1&pattern=Signal&stargazers=1&theme=Light)
+
 # excavator
 ps：项目持续更新ing
 

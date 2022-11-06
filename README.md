@@ -38,6 +38,8 @@ python3 excavator.py
 ```
 启动后会开启本地8080端口监听，代理流量进8080端口即可
 vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/report/res_example.txt
+# 证书安装
+如果需要导入证书，在启动excavator.py后开启浏览器代理访问http://mitm.it，下载对应操作系统下的证书即可
 # 优化todo
 - [ ] html报告输出
 - [ ] 增加用户自定义参数，如指定检测模块、自定义监听端口等

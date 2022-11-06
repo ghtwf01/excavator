@@ -33,6 +33,7 @@ python3 reverse.py
 python3 excavator.py
 # 开始人工测试网站或者开启爬虫，如联动rad爬虫
 ./rad_darwin_amd64 -t http://testphp.vulnweb.com/ -http-proxy 127.0.0.1:8080
+# 更多联动方式可参考xray文档：https://docs.xray.cool/#/scenario/burp
 ```
 启动后会开启本地8080端口监听，代理流量进8080端口即可
 # 优化todo

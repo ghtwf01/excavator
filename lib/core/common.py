@@ -44,8 +44,11 @@ def get_replaced_url(url, value, target_address, token=""):
     return url1
 
 def recharge_report():
-    if os.path.exists("report/res_example.txt"):
-        os.system("rm report/res_example.txt")
+    if os.path.exists("report/res.txt"):
+        if platform.system().lower() == "windows":
+            os.system("del report/res.txt")
+        else:
+            os.system("rm report/res.txt")
 
 def vuln_print(url, vuln_type, level, method, body=""):
     msg = ""

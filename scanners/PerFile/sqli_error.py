@@ -38,7 +38,7 @@ class SQLI:
                         vuln_print(url1, "sqli", vuln_level["sqli"], request.method)
                         break
 
-    def check_post_urlencode_sqli(self, request):
+    def check_post_urlencode_error_sqli(self, request):
         url = request.url
         body = request.get_text()
         mid_url = "https://www.baidu.com?" + body
@@ -54,7 +54,7 @@ class SQLI:
                         vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
                         break
 
-    def check_post_json_sqli(self, request):
+    def check_post_json_error_sqli(self, request):
         url = request.url
         body = request.get_text()
         dict = json.loads(body)

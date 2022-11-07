@@ -1,6 +1,7 @@
 from lib.core.spiderset import *
 from scanners.PerFile.information_disclosure import Information_Check
 from lib.core.common import get_content_type
+from multiprocessing import Process
 class Information_disclosure:
     def __init__(self):
         self.sign = 0
@@ -8,6 +9,8 @@ class Information_disclosure:
         self.url = ""
         self.method = ""
         self.body = ""
+    def check_information_disclosure_task(self, response_html, url, method, body):
+        Information_Check().check_information_disclosure(response_html, url, method, body)
     def request(self, flow):
         request = flow.request
         self.url = request.url
@@ -23,5 +26,7 @@ class Information_disclosure:
             return 0
         response = flow.response
         content_type = get_content_type(response)
+        response_html = str(response.text)
         if "application/xml" in content_type or "application/json" in content_type:
-            Information_Check().check_information_disclosure(str(response.text), self.url, self.method, self.body)
+            p1 = Process(target=self.check_information_disclosure_task, args=(response_html, self.url, self.method, self.body))
+            p1.start()

@@ -11,7 +11,7 @@ from lib.settings import vuln_level
 
 class SQLI:
     def __init__(self):
-        self.sleep_str = "2"
+        self.sleep_str = "5"
         self.num = random_num(4)
         self.sql_time_payloads = {
             "MySQL": (

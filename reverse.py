@@ -14,7 +14,8 @@ from lib.reverse.reverse_dns import dns_start
 
 def reverse_main():
     th = []
-    for func in [http_start, rmi_start, dns_start]:
+    for func in [http_start]:
+    # for func in [http_start, rmi_start, dns_start]:
         thread = threading.Thread(target=func)
         thread.setDaemon(True)
         thread.start()

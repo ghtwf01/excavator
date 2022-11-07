@@ -7,7 +7,7 @@ import time
 import struct
 import binascii
 
-from config import REVERSE_DNS
+# from config import REVERSE_DNS
 from lib.reverse.lib import rlog, reverse_lock, reverse_records
 
 try:

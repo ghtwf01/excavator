@@ -9,7 +9,7 @@ import struct
 import time
 import binascii
 
-from config import REVERSE_RMI_IP, REVERSE_RMI_PORT
+# from config import REVERSE_RMI_IP, REVERSE_RMI_PORT
 from lib.reverse.lib import rlog, reverse_records, reverse_lock
 
 

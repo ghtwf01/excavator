@@ -40,6 +40,8 @@ python3 excavator.py
 ```
 启动后会开启本地8080端口监听，代理流量进8080端口即可
 vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/report/res_example.txt
+# 反连平台
+如果要启动反连平台，需要在config.py里将REVERSE_HTTP_IP改为自己的公网ip(内网探测改为内网ip)即可，端口可自定义
 # 证书安装
 如果需要导入证书，在启动excavator.py后开启浏览器代理访问http://mitm.it ，下载对应操作系统下的证书即可
 ![pem](https://user-images.githubusercontent.com/56472384/200172366-d6a5a83e-e3af-4574-a97b-465a7547dfd7.png)

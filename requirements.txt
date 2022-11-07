@@ -1,4 +1,4 @@
 beautifulsoup4
 requests
 mitmproxy
-markupsafe==2.0.1
+markupsafe==2.1.1

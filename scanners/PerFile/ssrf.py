@@ -16,10 +16,13 @@ class SSRF_Check:
                     token = random_str(20)
                     url1 = get_replaced_url(url, dict[key][0], dnslog_platform_address, token)
                     requests.get(url1, allow_redirects=False)
-                    check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
-                    if token in check_ssrf_res:
-                        print("[+] " + url1 + " ssrf exists")
-                        vuln_print(url1, "ssrf", vuln_level["ssrf"], request.method)
+                    try:
+                        check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
+                        if token in check_ssrf_res:
+                            print("[+] " + url1 + " ssrf exists")
+                            vuln_print(url1, "ssrf", vuln_level["ssrf"], request.method)
+                    except:
+                        pass
 
     def check_post_urlencode_ssrf(self, request):
         url = request.url
@@ -32,10 +35,13 @@ class SSRF_Check:
                     token = random_str(20)
                     dict[key][0] = dnslog_platform_address + token
                     requests.post(url, data=dict)
-                    check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
-                    if token in check_ssrf_res:
-                        print("[+] " + url + " ssrf exists")
-                        vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, dict)
+                    try:
+                        check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
+                        if token in check_ssrf_res:
+                            print("[+] " + url + " ssrf exists")
+                            vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, dict)
+                    except:
+                        pass
 
     def check_post_json_ssrf(self, request):
         url = request.url
@@ -48,10 +54,13 @@ class SSRF_Check:
                     dict[key] = dnslog_platform_address + token
                     headers = {"Content-Type":"application/json"}
                     requests.post(url, data=json.dumps(dict), headers=headers)
-                    check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
-                    if token in check_ssrf_res:
-                        print("[+] " + url + " ssrf exists")
-                        vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, dict)
+                    try:
+                        check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
+                        if token in check_ssrf_res:
+                            print("[+] " + url + " ssrf exists")
+                            vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, dict)
+                    except:
+                        pass
 
 # if __name__ == "__main__":
 #     check_post_json_ssrf("http://192.168.0.101:8080/ssrf","{\"no\":\"aaa\",\"url\":\"https://www.baidu.com/index.php?aa=qq\"}")

@@ -1,9 +1,14 @@
 from lib.settings import notAcceptedExt
 from urllib.parse import urlparse
 from config import EXCLUDES
+from urllib import parse
 def check_ext_if_pass(url):
     try:
-        ext = url.split(".")[-1].split("?")[0]
+        scheme = parse.urlparse(url).scheme
+        netloc = parse.urlparse(url).netloc
+        path = parse.urlparse(url).path
+        url = scheme + "://" + netloc + path
+        ext = url.split(".")[-1]
         if ext in notAcceptedExt:
             return True
         else:

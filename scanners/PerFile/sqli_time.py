@@ -73,7 +73,7 @@ class SQLI:
                     end_time = time.time()
                     payload_time = end_time - start_time
                     # print("payload耗时："+str(end_time-start_time))
-                    if payload_time > 2:
+                    if payload_time > 5:
                         max_common_time = self.max_time(url)
                         if payload_time > max_common_time:
                             print("存在sql时间盲注，payload："+url1)

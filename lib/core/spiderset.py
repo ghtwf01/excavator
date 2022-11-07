@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 from config import EXCLUDES
 def check_ext_if_pass(url):
     try:
-        ext = url.split(".")[-1]
+        ext = url.split(".")[-1].split("?")[0]
         if ext in notAcceptedExt:
             return True
         else:

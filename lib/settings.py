@@ -77,7 +77,8 @@ notAcceptedExt = [
     "wma",
     "zip",
     "woff2",
-    "js"
+    "js",
+    "avif"
 ]
 ssrf_or_redirect_params = ["img", "url", "return", "returnurl", "goto", "callback", "oauth_callback", "link", "link_to", "linkto", "ref_url", "text", "to", "content", "jump", "jump_to", "download", "dest", "redirect", "redirect_url", "redirect_to", "uri", "path", "continue", "windows", "next", "data", "reference", "site", "html", "share", "wap", "src", "source", "target", "u", "display", "domain"]
 vuln_level = {"ssrf":"high", "information_disclosure":"low", "url_redirect":"low", "xss":"middle", "sqli":"high", "cors":"low"}

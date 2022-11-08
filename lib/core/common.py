@@ -21,11 +21,11 @@ def random_num(nums):
     return int(salt)
 
 
-def get_content_type(request):
+def get_content_type(response):
     content_type = ""
     try:
-        content_type = request.headers['Content-Type']
-        content_type = request.headers['content-type']
+        content_type = response.headers['Content-Type']
+        content_type = response.headers['content-type']
     except:
         pass
     return content_type

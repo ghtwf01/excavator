@@ -54,7 +54,10 @@ class SQLI:
         times = []
         for i in range(1, 21):
             start_time = time.time()
-            requests.get(url)
+            try:
+                requests.get(url)
+            except:
+                pass
             end_time = time.time()
             times.append(end_time-start_time)
         # mac m1不支持numpy库进行标准差计算，这里用计算两次请求时间之间的差值作为粗略的标准差
@@ -69,16 +72,31 @@ class SQLI:
                 for payload in payloads:
                     url1 = get_replaced_url(url, dict[key][0], dict[key][0] + payload)
                     start_time = time.time()
-                    requests.get(url1)
+                    try:
+                        requests.get(url1)
+                    except:
+                        pass
                     end_time = time.time()
                     payload_time = end_time - start_time
                     # print("payload耗时："+str(end_time-start_time))
                     if payload_time > 5:
                         max_common_time = self.max_time(url)
                         if payload_time > max_common_time:
-                            print("存在sql时间盲注，payload："+url1)
-                            vuln_print(url1, "sqli", vuln_level["sqli"], request.method)
-                            break
+                            start_time = time.time()
+                            try:
+                                res_code = requests.get(url1, allow_redirects=False).status_code
+                                if res_code == 302:
+                                    # print(url1+" 302不检测")
+                                    break
+                            except:
+                                pass
+                            end_time = time.time()
+                            recheck_payload_time = end_time - start_time
+                            if recheck_payload_time > max_common_time:
+                                print("存在sql时间盲注，payload："+url1)
+                                print("第一次payload耗时："+str(payload_time)+",20次请求平均耗时+标准差："+str(max_common_time)+",再次payload耗时："+str(recheck_payload_time))
+                                vuln_print(url1, "sqli", vuln_level["sqli"], request.method)
+                                break
 
     def check_post_urlencode_sqli(self, request):
         url = request.url
@@ -91,16 +109,29 @@ class SQLI:
                 for payload in payloads:
                     dict[key][0] = dict[key][0] + payload
                     start_time = time.time()
-                    requests.post(url, data=dict)
+                    try:
+                        requests.post(url, data=dict)
+                    except:
+                        pass
                     end_time = time.time()
                     payload_time = end_time - start_time
                     # print("payload耗时：" + str(end_time - start_time))
-                    if payload_time > 2:
+                    if payload_time > 5:
                         max_common_time = self.max_time(url)
                         if payload_time > max_common_time:
-                            print("存在sql时间盲注，payload：" + url + "body："+str(dict))
-                            vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
-                            break
+                            start_time = time.time()
+                            try:
+                                requests.post(url, data=dict)
+                            except:
+                                pass
+                            end_time = time.time()
+                            recheck_payload_time = end_time - start_time
+                            if recheck_payload_time > max_common_time:
+                                print("存在sql时间盲注，payload：" + url + "body："+str(dict))
+                                print("第一次payload耗时：" + str(payload_time) + ",20次请求平均耗时+标准差：" + str(
+                                    max_common_time) + ",再次payload耗时：" + str(recheck_payload_time))
+                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
+                                break
 
     def check_post_json_sqli(self, request):
         url = request.url
@@ -113,16 +144,29 @@ class SQLI:
                     dict[key] = dict[key] + payload
                     headers = {"Content-Type": "application/json"}
                     start_time = time.time()
-                    requests.post(url, data=dict, headers=headers)
+                    try:
+                        requests.post(url, data=dict, headers=headers)
+                    except:
+                        pass
                     end_time = time.time()
                     payload_time = end_time - start_time
                     # print("payload耗时：" + str(end_time - start_time))
-                    if payload_time > 2:
+                    if payload_time > 5:
                         max_common_time = self.max_time(url)
                         if payload_time > max_common_time:
-                            print("存在sql时间盲注，payload：" + url + "body：" + str(dict))
-                            vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
-                            break
+                            start_time = time.time()
+                            try:
+                                requests.post(url, data=dict, headers=headers)
+                            except:
+                                pass
+                            end_time = time.time()
+                            recheck_payload_time = end_time - start_time
+                            if recheck_payload_time > max_common_time:
+                                print("存在sql时间盲注，payload：" + url + "body：" + str(dict))
+                                print("第一次payload耗时：" + str(payload_time) + ",20次请求平均耗时+标准差：" + str(
+                                    max_common_time) + ",再次payload耗时：" + str(recheck_payload_time))
+                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
+                                break
 
 #
 #

@@ -23,9 +23,12 @@ excavator是一款基于mitmproxy的插件式被动安全漏洞扫描器，此�
     - 正则匹配url替换检测+常见URL重定向参数检测
 - [x] 敏感信息泄露扫描
     - 敏感信息正则配合Content-Type检测，减少误报
+- [x] CORS扫描
 - [ ] JSONP扫描
-- [ ] CORS扫描
+- [ ] 文件上传扫描
 - [ ] 越权检测
+- [ ] 通用cve漏洞poc扫描
+- [ ] 欢迎大家提意见
 # 使用方式
 ```python
 # 首次使用安装依赖
@@ -50,6 +53,7 @@ vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/repor
 - [ ] 增加用户自定义参数，如指定检测模块、自定义监听端口等
 - [ ] 增加代理扫描
 - [ ] 增加excavator的检测插件
+- [ ] 持续优化代码
 # 参考&致谢
 https://github.com/w-digital-scanner/w13scan
 

@@ -2,7 +2,7 @@ from urllib import parse
 from lib.core.common import vuln_print, get_replaced_url
 import requests
 from lib.settings import ssrf_or_redirect_params, vuln_level
-class Url_Redirect:
+class Url_Redirect_Check:
     def check_url_direct(self, request):
         url = request.url
         dict = parse.parse_qs(parse.urlparse(url).query)

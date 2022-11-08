@@ -1,10 +1,15 @@
 from lib.core.spiderset import *
 from scanners.PerFile.xss import MyHTMLParser
 from multiprocessing import Process
+import requests
 class XSS:
     def __init__(self):
         self.all_urls = []
     def check_xss_task(self, request):
+        content_type = requests.get(request.url).headers["Content-Type"]
+        if "application/json" in content_type:
+            # print("返回包content-type不满足xss检测")
+            return 0
         MyHTMLParser().check_xss(request)
     def request(self, flow):
         request = flow.request

@@ -56,6 +56,7 @@ vulnweb扫描报告可见：https://github.com/ghtwf01/excavator/blob/main/repor
 # 优点
 手工测试时利用浏览器代理可实现登陆态漏洞检测，浏览器访问页面时请求的所有接口都会被检测，大大增加了检测面
 非手工测试时使用爬虫流量导入excavator也很方便
+
 总结：覆盖手工、非手工场景，亲民
 # 优化todo
 - [ ] html报告输出

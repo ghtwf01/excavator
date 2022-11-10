@@ -2,6 +2,7 @@ import random
 from urllib import parse
 import platform
 import os
+import difflib
 
 
 def random_str(nums):
@@ -30,6 +31,8 @@ def get_content_type(response):
         pass
     return content_type
 
+def similar(text1, text2):
+    return difflib.SequenceMatcher(None, text1, text2).quick_ratio()
 
 def get_replaced_url(url, value, target_address, token=""):
     scheme = parse.urlparse(url).scheme

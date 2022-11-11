@@ -7,6 +7,7 @@ class JSONP:
         self.url = ""
         self.method = ""
         self.all_urls = []
+        self.sign = 0
 
     def check_jsonp_task(self, url, method, response_text):
         Jsonp_Check().check_jsonp(url, method, response_text)

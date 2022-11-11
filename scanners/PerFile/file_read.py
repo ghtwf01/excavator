@@ -28,7 +28,7 @@ class FileReadCheck:
                                 "file_read",
                                 vuln_level["file_read"],
                                 request.method)
-                            break
+                            return 0
 
     def check_post_urlencode_file_read(self, request):
         url = request.url
@@ -52,7 +52,7 @@ class FileReadCheck:
                                 vuln_level["file_read"],
                                 request.method,
                                 body)
-                            break
+                            return 0
 
     def check_post_json_file_read(self, request):
         url = request.url
@@ -74,4 +74,4 @@ class FileReadCheck:
                                 vuln_level["file_read"],
                                 request.method,
                                 body)
-                            break
+                            return 0

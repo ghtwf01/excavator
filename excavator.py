@@ -1,5 +1,6 @@
 import os
-from lib.core.common import recharge_report
+from lib.core.common import recharge_report, banner
+banner()
 recharge_report()
 addon_path = os.getcwd()+"/addon.py"
 print("Proxy server listening at http://*:8080")

@@ -73,7 +73,7 @@ class SQLI:
                     url1 = get_replaced_url(url, dict[key][0], dict[key][0] + payload)
                     start_time = time.time()
                     try:
-                        requests.get(url1)
+                        requests.get(url1, headers=request.headers)
                     except:
                         pass
                     end_time = time.time()
@@ -84,7 +84,7 @@ class SQLI:
                         if payload_time > max_common_time:
                             start_time = time.time()
                             try:
-                                res_code = requests.get(url1, allow_redirects=False).status_code
+                                res_code = requests.get(url1, headers=request.headers, allow_redirects=False).status_code
                                 if res_code == 302:
                                     # print(url1+" 302不检测")
                                     break
@@ -110,7 +110,7 @@ class SQLI:
                     dict[key][0] = dict[key][0] + payload
                     start_time = time.time()
                     try:
-                        requests.post(url, data=dict)
+                        requests.post(url, data=dict, headers=request.headers)
                     except:
                         pass
                     end_time = time.time()
@@ -121,7 +121,7 @@ class SQLI:
                         if payload_time > max_common_time:
                             start_time = time.time()
                             try:
-                                requests.post(url, data=dict)
+                                requests.post(url, data=dict, headers=request.headers)
                             except:
                                 pass
                             end_time = time.time()
@@ -142,10 +142,9 @@ class SQLI:
             if type(value).__name__ == "str":
                 for payload in payloads:
                     dict[key] = dict[key] + payload
-                    headers = {"Content-Type": "application/json"}
                     start_time = time.time()
                     try:
-                        requests.post(url, data=dict, headers=headers)
+                        requests.post(url, data=dict, headers=request.headers)
                     except:
                         pass
                     end_time = time.time()
@@ -156,7 +155,7 @@ class SQLI:
                         if payload_time > max_common_time:
                             start_time = time.time()
                             try:
-                                requests.post(url, data=dict, headers=headers)
+                                requests.post(url, data=dict, headers=request.headers)
                             except:
                                 pass
                             end_time = time.time()

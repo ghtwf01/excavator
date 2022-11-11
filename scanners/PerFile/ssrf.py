@@ -15,7 +15,7 @@ class SSRF_Check:
                 if "https://" in value[0] or "http://" in value[0] or key.lower() in ssrf_or_redirect_params:
                     token = random_str(20)
                     url1 = get_replaced_url(url, dict[key][0], dnslog_platform_address, token)
-                    requests.get(url1, allow_redirects=False)
+                    requests.get(url1, headers=request.headers, allow_redirects=False)
                     try:
                         check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
                         if token in check_ssrf_res:
@@ -34,7 +34,7 @@ class SSRF_Check:
                 if "https://" in value[0] or "http://" in value[0] or key.lower() in ssrf_or_redirect_params:
                     token = random_str(20)
                     dict[key][0] = dnslog_platform_address + token
-                    requests.post(url, data=dict)
+                    requests.post(url, data=dict, headers=request.headers)
                     try:
                         check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
                         if token in check_ssrf_res:
@@ -52,8 +52,7 @@ class SSRF_Check:
                 if "https://" in value or "http://" in value or key.lower() in ssrf_or_redirect_params:
                     token = random_str(20)
                     dict[key] = dnslog_platform_address + token
-                    headers = {"Content-Type":"application/json"}
-                    requests.post(url, data=json.dumps(dict), headers=headers)
+                    requests.post(url, data=json.dumps(dict), headers=request.headers)
                     try:
                         check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
                         if token in check_ssrf_res:

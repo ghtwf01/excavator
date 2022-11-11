@@ -31,7 +31,7 @@ class SQLI:
             if len(value) == 1:
                 for payload in self._payloads:
                     url1 = get_replaced_url(url, dict[key][0], dict[key][0]+payload)
-                    html = requests.get(url1).text
+                    html = requests.get(url1, headers=request.headers).text
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print("database: "+res[0]['type']+"\nerror message: "+res[0]['text'])
@@ -47,7 +47,7 @@ class SQLI:
             if len(value) == 1:
                 for payload in self._payloads:
                     dict[key][0] = dict[key][0]+payload
-                    html = requests.post(url, data=dict).text
+                    html = requests.post(url, data=dict, headers=request.headers).text
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print("database: " + res[0]['type'] + "\nerror message: " + res[0]['text'])
@@ -62,8 +62,7 @@ class SQLI:
             if type(value).__name__ == "str":
                 for payload in self._payloads:
                     dict[key] = dict[key]+payload
-                    headers = {"Content-Type": "application/json"}
-                    html = requests.post(url, data=json.dumps(dict), headers=headers).text
+                    html = requests.post(url, data=json.dumps(dict), headers=request.headers).text
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print("database: " + res[0]['type'] + "\nerror message: " + res[0]['text'])

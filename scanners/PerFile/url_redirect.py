@@ -11,7 +11,7 @@ class Url_Redirect_Check:
             if len(value) == 1:
                 if "https://" in value[0] or "http://" in value[0] or key.lower() in ssrf_or_redirect_params:
                     url1 = get_replaced_url(url, dict[key][0], redirect_url)
-                    headers = requests.get(url1, allow_redirects=False).headers
+                    headers = requests.get(url1, headers=request.headers, allow_redirects=False).headers
                     try:
                         if headers["Location"] == "https://example.com":
                             print("[+] " + url1 + " url redirect exists")

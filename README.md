@@ -22,7 +22,9 @@ excavator是一款基于mitmproxy的插件式被动安全漏洞扫描器，此�
 - [x] URL重定向检测
     - 正则匹配url替换检测+常见URL重定向参数检测
 - [x] 敏感信息泄露检测
-    - 敏感信息正则配合Content-Type检测，减少误报
+    - 返回包中敏感信息泄露，正则配合Content-Type检测，减少误报
+    - [ ] http请求包中敏感数据传输(AK/SK、api_key等)
+    - [ ] 敏感文件泄露(.git、备份文件等)
 - [x] CORS配置不当检测
 - [x] JSONP劫持检测
     - 检测JSONP特征存在+替换Referer判断是否有劫持风险

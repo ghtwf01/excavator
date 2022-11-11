@@ -130,7 +130,7 @@ class SQLI:
                                 print("存在sql时间盲注，payload：" + url + "body："+str(dict))
                                 print("第一次payload耗时：" + str(payload_time) + ",20次请求平均耗时+标准差：" + str(
                                     max_common_time) + ",再次payload耗时：" + str(recheck_payload_time))
-                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
+                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, body)
                                 break
 
     def check_post_json_sqli(self, request):
@@ -164,7 +164,7 @@ class SQLI:
                                 print("存在sql时间盲注，payload：" + url + "body：" + str(dict))
                                 print("第一次payload耗时：" + str(payload_time) + ",20次请求平均耗时+标准差：" + str(
                                     max_common_time) + ",再次payload耗时：" + str(recheck_payload_time))
-                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
+                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, body)
                                 break
 
 #

@@ -36,7 +36,7 @@ class File_Read_Check:
                     for regx in file_read_regexArray:
                         if re.search(regx, html, re.I | re.S | re.M):
                             print("存在任意文件读取，url："+url+", body："+str(dict))
-                            vuln_print(url, "file_read", vuln_level["file_read"], request.method, str(dict))
+                            vuln_print(url, "file_read", vuln_level["file_read"], request.method, body)
                             break
 
     def check_post_json_file_read(self, request):
@@ -51,5 +51,5 @@ class File_Read_Check:
                     for regx in file_read_regexArray:
                         if re.search(regx, html, re.I | re.S | re.M):
                             print("存在任意文件读取，url："+url+", body："+str(dict))
-                            vuln_print(url, "file_read", vuln_level["file_read"], request.method, str(dict))
+                            vuln_print(url, "file_read", vuln_level["file_read"], request.method, body)
                             break

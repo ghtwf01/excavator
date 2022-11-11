@@ -39,7 +39,7 @@ class SSRF_Check:
                         check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
                         if token in check_ssrf_res:
                             print("[+] " + url + " ssrf exists")
-                            vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, dict)
+                            vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, body)
                     except:
                         pass
 
@@ -57,7 +57,7 @@ class SSRF_Check:
                         check_ssrf_res = requests.get(dnslog_platform_address + "_/search?q=" + token).text
                         if token in check_ssrf_res:
                             print("[+] " + url + " ssrf exists")
-                            vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, dict)
+                            vuln_print(request.url, "ssrf", vuln_level["ssrf"], request.method, body)
                     except:
                         pass
 

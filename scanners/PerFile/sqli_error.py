@@ -4,7 +4,6 @@ from lib.rule.sensitive_error_message import sensitive_page_error_message_check
 from lib.core.common import random_str, random_num, get_replaced_url, vuln_print
 from urllib import parse
 import requests
-
 from lib.settings import vuln_level
 
 
@@ -66,7 +65,7 @@ class SQLI:
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print("database: " + res[0]['type'] + "\nerror message: " + res[0]['text'])
-                        vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
+                        vuln_print(url, "sqli", vuln_level["sqli"], request.method, body)
                         break
 
 # if __name__ == "__main__":

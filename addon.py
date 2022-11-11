@@ -7,6 +7,8 @@ from addons.sqli_time_addon import SQLI_Time
 from addons.cors_addon import Cors
 from addons.jsonp_addon import JSONP
 from addons.file_read_addon import File_Read
+from addons.unauth_addon import Unauth
+
 addons = [
     SSRF(), Information_disclosure(), Url_redirect(), XSS(), SQLI_Error(), SQLI_Time(), Cors(), JSONP(), File_Read()
 ]

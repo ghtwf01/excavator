@@ -1,5 +1,5 @@
 from lib.core.spiderset import *
-from scanners.PerFile.information_disclosure import Information_Check
+from scanners.PerFile.html_res_information_disclosure import Information_Check
 from lib.core.common import get_content_type
 from multiprocessing import Process
 class Information_disclosure:

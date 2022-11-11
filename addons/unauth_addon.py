@@ -1,9 +1,9 @@
-from lib.core.common import get_content_type
-from lib.core.spiderset import check_ext_if_pass, check_url_is_repeat, check_domain_is_forbid
-from scanners.PerFile.unauth import Unauth_Check
+from lib.core.common import check_if_url_eligibility
+from scanners.PerFile.unauth import UnAuthCheck
 from multiprocessing import Process
 
-class Unauth:
+
+class UnAuth:
     def __init__(self):
         self.all_urls = []
         self.sign = 0
@@ -12,14 +12,26 @@ class Unauth:
         self.body = ""
         self.method = ""
         self.content_type = ""
-    def check_get_unauth_task(self, url, req_headers, method, response_text):
-        Unauth_Check().check_get_unauth(url, req_headers, method, response_text)
 
-    def check_post_urlencode_unauth_task(self, url, req_headers, method, body, response_text):
-        Unauth_Check().check_post_urlencode_unauth(url, req_headers, method, body, response_text)
+    @staticmethod
+    def check_get_unauth_task(url, req_headers, method, response_text):
+        UnAuthCheck().check_get_unauth(url, req_headers, method, response_text)
 
-    def check_post_json_unauth_task(self, url, req_headers, method, body, response_text):
-        Unauth_Check().check_post_json_unauth(url, req_headers, method, body, response_text)
+    @staticmethod
+    def check_post_urlencode_unauth_task(
+            url, req_headers, method, body, response_text):
+        UnAuthCheck().check_post_urlencode_unauth(
+            url, req_headers, method, body, response_text)
+
+    @staticmethod
+    def check_post_json_unauth_task(
+            url,
+            req_headers,
+            method,
+            body,
+            response_text):
+        UnAuthCheck().check_post_json_unauth(
+            url, req_headers, method, body, response_text)
 
     def request(self, flow):
         request = flow.request
@@ -29,10 +41,10 @@ class Unauth:
         try:
             self.content_type = request.headers['Content-Type']
             self.content_type = request.headers['content-type']
-        except:
+        except BaseException:
             pass
         self.body = request.get_text()
-        if (check_ext_if_pass(request.url) or check_url_is_repeat(request.url, self.all_urls) or check_domain_is_forbid(request.url)):
+        if check_if_url_eligibility(request.url, self.all_urls):
             # print("[-]"+request.url+"不满足检测条件")
             self.sign = 1
             return 0
@@ -44,14 +56,26 @@ class Unauth:
             return 0
         response = flow.response
         if self.method == "GET":
-            p1 = Process(target=self.check_get_unauth_task, args=(self.url, self.req_headers, self.method, response.text))
+            p1 = Process(
+                target=self.check_get_unauth_task,
+                args=(
+                    self.url,
+                    self.req_headers,
+                    self.method,
+                    response.text))
             p1.start()
         if self.method == "POST":
             if "application/x-www-form-urlencoded" in self.content_type:
-                p1 = Process(target=self.check_post_urlencode_unauth_task, args=(self.url, self.req_headers, self.method, self.body, response.text))
+                p1 = Process(target=self.check_post_urlencode_unauth_task, args=(
+                    self.url, self.req_headers, self.method, self.body, response.text))
                 p1.start()
             if "application/json" in self.content_type:
-                p1 = Process(target=self.check_post_json_unauth_task, args=(self.url, self.req_headers, self.method, self.body, response.text))
+                p1 = Process(
+                    target=self.check_post_json_unauth_task,
+                    args=(
+                        self.url,
+                        self.req_headers,
+                        self.method,
+                        self.body,
+                        response.text))
                 p1.start()
-
-

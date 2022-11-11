@@ -1,14 +1,19 @@
-from lib.core.spiderset import *
-from scanners.PerFile.url_redirect import Url_Redirect_Check
+from lib.core.common import check_if_url_eligibility
+from scanners.PerFile.url_redirect import UrlRedirectCheck
 from multiprocessing import Process
-class Url_redirect:
+
+
+class UrlRedirect:
     def __init__(self):
         self.all_urls = []
-    def check_url_direct_task(self, request):
-        Url_Redirect_Check().check_url_direct(request)
+
+    @staticmethod
+    def check_url_direct_task(request):
+        UrlRedirectCheck().check_url_direct(request)
+
     def request(self, flow):
         request = flow.request
-        if (check_ext_if_pass(request.url) or check_url_is_repeat(request.url, self.all_urls) or check_domain_is_forbid(request.url)):
+        if check_if_url_eligibility(request.url, self.all_urls):
             # print("[-]"+request.url+"不满足检测条件")
             return 0
         print("[" + request.method + "] URL重定向模块正在探测：" + request.url)

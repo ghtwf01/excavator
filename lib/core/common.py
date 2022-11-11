@@ -4,6 +4,8 @@ import platform
 import os
 import difflib
 
+from lib.core.spiderset import check_ext_if_pass, check_url_is_repeat, check_domain_is_forbid
+
 
 def random_str(nums):
     seed = "1234567890abcdefghijklmnopqrstuvwxyz"
@@ -13,20 +15,23 @@ def random_str(nums):
     salt = ''.join(sa)
     return salt
 
+
 def banner():
     print(
         '''
-        
-███████╗██╗  ██╗ ██████╗ █████╗ ██╗   ██╗ █████╗ ████████╗ ██████╗ ██████╗ 
+
+███████╗██╗  ██╗ ██████╗ █████╗ ██╗   ██╗ █████╗ ████████╗ ██████╗ ██████╗
 ██╔════╝╚██╗██╔╝██╔════╝██╔══██╗██║   ██║██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗
 █████╗   ╚███╔╝ ██║     ███████║██║   ██║███████║   ██║   ██║   ██║██████╔╝
 ██╔══╝   ██╔██╗ ██║     ██╔══██║╚██╗ ██╔╝██╔══██║   ██║   ██║   ██║██╔══██╗
 ███████╗██╔╝ ██╗╚██████╗██║  ██║ ╚████╔╝ ██║  ██║   ██║   ╚██████╔╝██║  ██║
 ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-                                                                           
+
                                                              v1.0
         '''
     )
+
+
 def random_num(nums):
     seed = "123456789"
     sa = []
@@ -45,8 +50,18 @@ def get_content_type(response):
         pass
     return content_type
 
+
+def check_if_url_eligibility(url, all_urls):
+    if (check_ext_if_pass(url) or check_url_is_repeat(
+            url, all_urls) or check_domain_is_forbid(url)):
+        return True
+    else:
+        return False
+
+
 def similar(text1, text2):
     return difflib.SequenceMatcher(None, text1, text2).quick_ratio()
+
 
 def get_replaced_url(url, value, target_address, token=""):
     scheme = parse.urlparse(url).scheme
@@ -60,12 +75,14 @@ def get_replaced_url(url, value, target_address, token=""):
     url1 = scheme + "://" + netloc + path + "?" + query1
     return url1
 
+
 def recharge_report():
     if os.path.exists("report/res.txt"):
         if platform.system().lower() == "windows":
             os.system("del report/res.txt")
         else:
             os.system("rm report/res.txt")
+
 
 def vuln_print(url, vuln_type, level, method, body=""):
     msg = ""
@@ -92,4 +109,4 @@ Level:%s
         ''') % (method, url, str(body).strip(), vuln_type, level)
     print(msg.strip())
     with open("report/res.txt", "a") as file:
-        file.write(msg.strip().strip("\033[0m").strip("\033[31m")+"\n")
+        file.write(msg.strip().strip("\033[0m").strip("\033[31m") + "\n")

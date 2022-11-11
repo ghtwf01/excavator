@@ -9,7 +9,7 @@ import time
 from lib.settings import vuln_level
 
 
-class SQLI:
+class SQLITimeCheck:
     def __init__(self):
         self.sleep_str = "5"
         self.num = random_num(4)
@@ -50,18 +50,19 @@ class SQLI:
         for payload in self.sql_time_payloads["Oracle"]:
             payloads.append(payload)
         return payloads
+
     def max_time(self, url):
         times = []
         for i in range(1, 21):
             start_time = time.time()
             try:
                 requests.get(url)
-            except:
+            except BaseException:
                 pass
             end_time = time.time()
-            times.append(end_time-start_time)
+            times.append(end_time - start_time)
         # mac m1不支持numpy库进行标准差计算，这里用计算两次请求时间之间的差值作为粗略的标准差
-        return max(times)+abs(times[0]-times[1])
+        return max(times) + abs(times[0] - times[1])
 
     def check_get_time_sqli(self, request):
         url = request.url
@@ -70,11 +71,12 @@ class SQLI:
         for key, value in dict.items():
             if len(value) == 1:
                 for payload in payloads:
-                    url1 = get_replaced_url(url, dict[key][0], dict[key][0] + payload)
+                    url1 = get_replaced_url(
+                        url, dict[key][0], dict[key][0] + payload)
                     start_time = time.time()
                     try:
                         requests.get(url1, headers=request.headers)
-                    except:
+                    except BaseException:
                         pass
                     end_time = time.time()
                     payload_time = end_time - start_time
@@ -84,7 +86,8 @@ class SQLI:
                         if payload_time > max_common_time:
                             start_time = time.time()
                             try:
-                                res_code = requests.get(url1, headers=request.headers, allow_redirects=False).status_code
+                                res_code = requests.get(
+                                    url1, headers=request.headers, allow_redirects=False).status_code
                                 if res_code == 302:
                                     # print(url1+" 302不检测")
                                     break
@@ -93,9 +96,16 @@ class SQLI:
                             end_time = time.time()
                             recheck_payload_time = end_time - start_time
                             if recheck_payload_time > max_common_time:
-                                print("存在sql时间盲注，payload："+url1)
-                                print("第一次payload耗时："+str(payload_time)+",20次请求平均耗时+标准差："+str(max_common_time)+",再次payload耗时："+str(recheck_payload_time))
-                                vuln_print(url1, "sqli", vuln_level["sqli"], request.method)
+                                print("存在sql时间盲注，payload：" + url1)
+                                print(
+                                    "第一次payload耗时：" +
+                                    str(payload_time) +
+                                    ",20次请求平均耗时+标准差：" +
+                                    str(max_common_time) +
+                                    ",再次payload耗时：" +
+                                    str(recheck_payload_time))
+                                vuln_print(
+                                    url1, "sqli", vuln_level["sqli"], request.method)
                                 break
 
     def check_post_urlencode_sqli(self, request):
@@ -111,7 +121,7 @@ class SQLI:
                     start_time = time.time()
                     try:
                         requests.post(url, data=dict, headers=request.headers)
-                    except:
+                    except BaseException:
                         pass
                     end_time = time.time()
                     payload_time = end_time - start_time
@@ -121,16 +131,24 @@ class SQLI:
                         if payload_time > max_common_time:
                             start_time = time.time()
                             try:
-                                requests.post(url, data=dict, headers=request.headers)
-                            except:
+                                requests.post(
+                                    url, data=dict, headers=request.headers)
+                            except BaseException:
                                 pass
                             end_time = time.time()
                             recheck_payload_time = end_time - start_time
                             if recheck_payload_time > max_common_time:
-                                print("存在sql时间盲注，payload：" + url + "body："+str(dict))
-                                print("第一次payload耗时：" + str(payload_time) + ",20次请求平均耗时+标准差：" + str(
-                                    max_common_time) + ",再次payload耗时：" + str(recheck_payload_time))
-                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, body)
+                                print(
+                                    "存在sql时间盲注，payload：" + url + "body：" + str(dict))
+                                print(
+                                    "第一次payload耗时：" +
+                                    str(payload_time) +
+                                    ",20次请求平均耗时+标准差：" +
+                                    str(max_common_time) +
+                                    ",再次payload耗时：" +
+                                    str(recheck_payload_time))
+                                vuln_print(
+                                    url, "sqli", vuln_level["sqli"], request.method, body)
                                 break
 
     def check_post_json_sqli(self, request):
@@ -145,7 +163,7 @@ class SQLI:
                     start_time = time.time()
                     try:
                         requests.post(url, data=dict, headers=request.headers)
-                    except:
+                    except BaseException:
                         pass
                     end_time = time.time()
                     payload_time = end_time - start_time
@@ -155,16 +173,24 @@ class SQLI:
                         if payload_time > max_common_time:
                             start_time = time.time()
                             try:
-                                requests.post(url, data=dict, headers=request.headers)
-                            except:
+                                requests.post(
+                                    url, data=dict, headers=request.headers)
+                            except BaseException:
                                 pass
                             end_time = time.time()
                             recheck_payload_time = end_time - start_time
                             if recheck_payload_time > max_common_time:
-                                print("存在sql时间盲注，payload：" + url + "body：" + str(dict))
-                                print("第一次payload耗时：" + str(payload_time) + ",20次请求平均耗时+标准差：" + str(
-                                    max_common_time) + ",再次payload耗时：" + str(recheck_payload_time))
-                                vuln_print(url, "sqli", vuln_level["sqli"], request.method, body)
+                                print(
+                                    "存在sql时间盲注，payload：" + url + "body：" + str(dict))
+                                print(
+                                    "第一次payload耗时：" +
+                                    str(payload_time) +
+                                    ",20次请求平均耗时+标准差：" +
+                                    str(max_common_time) +
+                                    ",再次payload耗时：" +
+                                    str(recheck_payload_time))
+                                vuln_print(
+                                    url, "sqli", vuln_level["sqli"], request.method, body)
                                 break
 
 #

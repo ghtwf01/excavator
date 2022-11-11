@@ -80,10 +80,82 @@ notAcceptedExt = [
     "js",
     "avif"
 ]
-ssrf_or_redirect_params = ["img", "url", "return", "returnurl", "goto", "callback", "oauth_callback", "link", "link_to", "linkto", "ref_url", "text", "to", "content", "jump", "jump_to", "download", "dest", "redirect", "redirect_url", "redirect_to", "uri", "path", "continue", "windows", "next", "data", "reference", "site", "html", "share", "wap", "src", "source", "target", "u", "display", "domain"]
-vuln_level = {"ssrf":"high", "information_disclosure":"low", "url_redirect":"low", "xss":"middle", "sqli":"high", "cors":"low", "jsonp":"low", "file_read":"middle", "unauth":"middle"}
-jsonp_args = ["_callback", "_cb", "callback", "cb", "jsonp", "jsonpcallback", "jsonpcb", "jsonp_cb", "json", "jsoncallback", "jcb", "call", "callBack", "jsonpCallback", "jsonpCb", "jsonp_Cb", "jsonCallback", "ca"]
-file_read_args = ["filename", "file", "path", "filepath", "file_name", "file_path", "page"]
+ssrf_or_redirect_params = [
+    "img",
+    "url",
+    "return",
+    "returnurl",
+    "goto",
+    "callback",
+    "oauth_callback",
+    "link",
+    "link_to",
+    "linkto",
+    "ref_url",
+    "text",
+    "to",
+    "content",
+    "jump",
+    "jump_to",
+    "download",
+    "dest",
+    "redirect",
+    "redirect_url",
+    "redirect_to",
+    "uri",
+    "path",
+    "continue",
+    "windows",
+    "next",
+    "data",
+    "reference",
+    "site",
+    "html",
+    "share",
+    "wap",
+    "src",
+    "source",
+    "target",
+    "u",
+    "display",
+    "domain"]
+vuln_level = {
+    "ssrf": "high",
+    "information_disclosure": "low",
+    "url_redirect": "low",
+    "xss": "middle",
+    "sqli": "high",
+    "cors": "low",
+    "jsonp": "low",
+    "file_read": "middle",
+    "unauth": "middle"}
+jsonp_args = [
+    "_callback",
+    "_cb",
+    "callback",
+    "cb",
+    "jsonp",
+    "jsonpcallback",
+    "jsonpcb",
+    "jsonp_cb",
+    "json",
+    "jsoncallback",
+    "jcb",
+    "call",
+    "callBack",
+    "jsonpCallback",
+    "jsonpCb",
+    "jsonp_Cb",
+    "jsonCallback",
+    "ca"]
+file_read_args = [
+    "filename",
+    "file",
+    "path",
+    "filepath",
+    "file_name",
+    "file_path",
+    "page"]
 file_read_payloads = [
     "../../../../../../../../../../../etc/passwd",
     "/etc/passwd",
@@ -94,14 +166,14 @@ file_read_payloads = [
     "../../WEB-INF/web.xml"
 ]
 file_read_regexArray = [
-            '(Linux+\sversion\s+[\d\.\w\-_\+]+\s+\([^)]+\)\s+\(gcc\sversion\s[\d\.\-_]+\s)',
-            '(root:\w:\d*:)',
-            "System\.IO\.FileNotFoundException: Could not find file\s'\w:",
-            "System\.IO\.DirectoryNotFoundException: Could not find a part of the path\s'\w:",
-            "<b>Warning<\/b>:\s\sDOMDocument::load\(\)\s\[<a\shref='domdocument.load'>domdocument.load<\/a>\]:\s(Start tag expected|I\/O warning : failed to load external entity).*(Windows\/win.ini|\/etc\/passwd).*\sin\s<b>.*?<\/b>\son\sline\s<b>\d+<\/b>",
-            "(<web-app[\s\S]+<\/web-app>)",
-            "Warning: fopen\(",
-            "open_basedir restriction in effect",
-            '/bin/(bash|sh)[^\r\n<>]*[\r\n]',
-            '\[boot loader\][^\r\n<>]*[\r\n]'
-        ]
+    '(Linux+\\sversion\\s+[\\d\\.\\w\\-_\\+]+\\s+\\([^)]+\\)\\s+\\(gcc\\sversion\\s[\\d\\.\\-_]+\\s)',
+    '(root:\\w:\\d*:)',
+    "System\\.IO\\.FileNotFoundException: Could not find file\\s'\\w:",
+    "System\\.IO\\.DirectoryNotFoundException: Could not find a part of the path\\s'\\w:",
+    "<b>Warning<\\/b>:\\s\\sDOMDocument::load\\(\\)\\s\\[<a\\shref='domdocument.load'>domdocument.load<\\/a>\\]:\\s(Start tag expected|I\\/O warning : failed to load external entity).*(Windows\\/win.ini|\\/etc\\/passwd).*\\sin\\s<b>.*?<\\/b>\\son\\sline\\s<b>\\d+<\\/b>",
+    "(<web-app[\\s\\S]+<\\/web-app>)",
+    "Warning: fopen\\(",
+    "open_basedir restriction in effect",
+    '/bin/(bash|sh)[^\r\n<>]*[\r\n]',
+    '\\[boot loader\\][^\r\n<>]*[\r\n]'
+]

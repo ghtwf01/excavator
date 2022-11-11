@@ -1,7 +1,9 @@
 import re
 from lib.core.common import vuln_print
 from lib.settings import vuln_level
-class Information_Check:
+
+
+class HtmlInformationCheck:
     def __init__(self):
         self.regxs = {
             # 匹配url
@@ -65,7 +67,7 @@ class Information_Check:
             # PGP 密钥块
             "PGP密钥": '-----BEGIN PGP PRIVATE KEY BLOCK-----',
             # possible_creds
-            #"密码泄露": '(?i)(password\\s*[`=:\\"]+\\s*[^\\s]+|password '
+            # "密码泄露": '(?i)(password\\s*[`=:\\"]+\\s*[^\\s]+|password '
             #        'is\\s*[`=:\\"]*\\s*[^\\s]+|pwd\\s*[`=:\\"]*\\s*[^\\s]+|passwd\\s*[`=:\\"]+\\s*[^\\s]+)',
 
             # RSA
@@ -80,10 +82,16 @@ class Information_Check:
             "Twillio 账号泄露 2": 'SK[0-9a-fA-F]{32}',
             "Twillio 账号泄露 3": 'AP[a-zA-Z0-9_\\-]{32}'
         }
+
     def check_information_disclosure(self, text, url, method, body):
         for key, regx in self.regxs.items():
             res = re.findall(regx, text)
             if len(res) != 0:
-                print("发现"+key+"：")
+                print("发现" + key + "：")
                 print(res)
-                vuln_print(url, "information_disclosure", vuln_level["information_disclosure"], method, body)
+                vuln_print(
+                    url,
+                    "information_disclosure",
+                    vuln_level["information_disclosure"],
+                    method,
+                    body)

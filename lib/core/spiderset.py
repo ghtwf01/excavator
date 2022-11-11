@@ -2,6 +2,8 @@ from lib.settings import notAcceptedExt
 from urllib.parse import urlparse
 from config import EXCLUDES
 from urllib import parse
+
+
 def check_ext_if_pass(url):
     try:
         scheme = parse.urlparse(url).scheme
@@ -15,6 +17,8 @@ def check_ext_if_pass(url):
             return False
     except:
         pass
+
+
 def check_url_is_repeat(url, all_urls):
     url = etl(url)
     if url in all_urls:
@@ -23,19 +27,23 @@ def check_url_is_repeat(url, all_urls):
     else:
         all_urls.append(url)
         return False
+
+
 def check_domain_is_forbid(url):
     domain = urlparse(url).netloc
     for forbid_key in EXCLUDES:
         if forbid_key in domain:
             return True
     return False
+
+
 def etl(str, onlyNUM=False):
-    '''
+    """
     传入一个字符串，将里面的字母转化为A，数字转化为N，特殊符号转换为T，其他符号或者字符转化成C
     :param str:
     :param onlyNUM:只换数字
     :return:
-    '''
+    """
     Chars = [',', '-', '_']
     chars = ""
     for c in str:

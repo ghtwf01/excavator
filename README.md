@@ -9,30 +9,29 @@ excavator是一款基于mitmproxy的插件式被动安全漏洞扫描器，此�
 # 运行原理
 ![流程图](https://user-images.githubusercontent.com/56472384/200158555-091c065e-6f31-40ca-ac9d-0358dad79411.png)
 # 检测插件
-- [x] XSS扫描
+- [x] XSS检测
     - 基于语义的XSS扫描
-- [x] SQL注入扫描
+- [x] SQL注入检测
     - 覆盖POST请求包中Content-Type为application/x-www-form-urlencoded和application/json的检测
     - 基于报错SQL注入检测
     - <del>基于网页相似度布尔类型的SQL注入检测</del>
     - 基于时间SQL注入检测
-- [x] SSRF扫描
+- [x] SSRF检测
     - 覆盖POST请求包中Content-Type为application/x-www-form-urlencoded和application/json的检测
     - 正则匹配url替换检测+常见SSRF参数检测
-- [x] URL重定向扫描
+- [x] URL重定向检测
     - 正则匹配url替换检测+常见URL重定向参数检测
-- [x] 敏感信息泄露扫描
+- [x] 敏感信息泄露检测
     - 敏感信息正则配合Content-Type检测，减少误报
-- [x] CORS配置不当扫描
-- [x] JSONP劫持扫描
+- [x] CORS配置不当检测
+- [x] JSONP劫持检测
     - 检测JSONP特征存在+替换Referer判断是否有劫持风险
-- [ ] 目录遍历扫描
-- [ ] 任意文件读取扫描
-- [ ] 远程代码/命令执行扫描
-- [ ] 文件上传扫描
+- [ ] 任意文件读取检测
+- [ ] 远程代码/命令执行检测
+- [ ] 文件上传检测
 - [ ] 越权检测
-- [ ] 通用cve漏洞poc扫描
-- [ ] 欢迎大家提意见
+- [ ] 通用cve漏洞poc检测
+- [ ] 等等
 # 使用方式
 ```python
 # 首次使用安装依赖

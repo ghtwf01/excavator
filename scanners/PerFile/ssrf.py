@@ -20,10 +20,10 @@ class SSRFCheck:
                     token = random_str(20)
                     url1 = get_replaced_url(
                         url, dict[key][0], dnslog_platform_address, token)
-                    requests.get(
-                        url1,
-                        headers=request.headers,
-                        allow_redirects=False)
+                    try:
+                        requests.get(url1, headers=request.headers, allow_redirects=False)
+                    except BaseException:
+                        pass
                     try:
                         check_ssrf_res = requests.get(
                             dnslog_platform_address + "_/search?q=" + token).text
@@ -46,7 +46,10 @@ class SSRFCheck:
                 ) in ssrf_or_redirect_params:
                     token = random_str(20)
                     dict[key][0] = dnslog_platform_address + token
-                    requests.post(url, data=dict, headers=request.headers)
+                    try:
+                        requests.post(url, data=dict, headers=request.headers)
+                    except BaseException:
+                        pass
                     try:
                         check_ssrf_res = requests.get(
                             dnslog_platform_address + "_/search?q=" + token).text
@@ -71,8 +74,10 @@ class SSRFCheck:
                 if "https://" in value or "http://" in value or key.lower() in ssrf_or_redirect_params:
                     token = random_str(20)
                     dict[key] = dnslog_platform_address + token
-                    requests.post(url, data=json.dumps(
-                        dict), headers=request.headers)
+                    try:
+                        requests.post(url, data=json.dumps(dict), headers=request.headers)
+                    except BaseException:
+                        pass
                     try:
                         check_ssrf_res = requests.get(
                             dnslog_platform_address + "_/search?q=" + token).text

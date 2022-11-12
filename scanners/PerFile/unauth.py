@@ -12,8 +12,11 @@ class UnAuthCheck:
         for key, value in req_headers.items():
             if key.lower() in ["cookie", "token", "auth"]:
                 req_headers[key] = ""
-                html = requests.get(
-                    url, headers=req_headers, allow_redirects=False).text
+                html = ""
+                try:
+                    html = requests.get(url, headers=req_headers, allow_redirects=False).text
+                except BaseException:
+                    pass
                 if similar(html, response_text) >= 0.95:
                     print(url + " 存在未授权访问")
                     vuln_print(url, "unauth", vuln_level["unauth"], method)
@@ -30,11 +33,11 @@ class UnAuthCheck:
         for key, value in req_headers.items():
             if key.lower() in ["cookie", "token", "auth"]:
                 req_headers[key] = ""
-                html = requests.post(
-                    url,
-                    data=dict,
-                    headers=req_headers,
-                    allow_redirects=False).text
+                html = ""
+                try:
+                    html = requests.post(url, data=dict, headers=req_headers, allow_redirects=False).text
+                except BaseException:
+                    pass
                 if similar(html, response_text) >= 0.95:
                     print(url + " 存在未授权访问")
                     vuln_print(
@@ -55,11 +58,11 @@ class UnAuthCheck:
         for key, value in req_headers.items():
             if key.lower() in ["cookie", "token", "auth"]:
                 req_headers[key] = ""
-                html = requests.post(
-                    url,
-                    data=dict,
-                    headers=req_headers,
-                    allow_redirects=False).text
+                html = ""
+                try:
+                    html = requests.post(url, data=dict, headers=req_headers, allow_redirects=False).text
+                except BaseException:
+                    pass
                 if similar(html, response_text) >= 0.95:
                     print(url + " 存在未授权访问")
                     vuln_print(

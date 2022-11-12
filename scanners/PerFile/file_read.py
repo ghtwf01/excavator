@@ -19,7 +19,11 @@ class FileReadCheck:
                     "." in value or "/" in value):
                 for payload in file_read_payloads:
                     url1 = get_replaced_url(url, dict[key][0], payload)
-                    html = requests.get(url1, headers=request.headers).text
+                    html = ""
+                    try:
+                        html = requests.get(url1, headers=request.headers).text
+                    except BaseException:
+                        pass
                     for regx in file_read_regexArray:
                         if re.search(regx, html, re.I | re.S | re.M):
                             print("存在任意文件读取，payload：" + url1)
@@ -40,8 +44,11 @@ class FileReadCheck:
                     "." in value or "/" in value):
                 for payload in file_read_payloads:
                     dict[key][0] = payload
-                    html = requests.post(
-                        url, data=dict, headers=request.headers).text
+                    html = ""
+                    try:
+                        html = requests.post(url, data=dict, headers=request.headers).text
+                    except BaseException:
+                        pass
                     for regx in file_read_regexArray:
                         if re.search(regx, html, re.I | re.S | re.M):
                             print(
@@ -62,8 +69,11 @@ class FileReadCheck:
             if type(value).__name__ == "str":
                 for payload in file_read_payloads:
                     dict[key] = payload
-                    html = requests.post(
-                        url, data=json.dumps(dict), headers=request.headers).text
+                    html = ""
+                    try:
+                        html = requests.post(url, data=json.dumps(dict), headers=request.headers).text
+                    except BaseException:
+                        pass
                     for regx in file_read_regexArray:
                         if re.search(regx, html, re.I | re.S | re.M):
                             print(

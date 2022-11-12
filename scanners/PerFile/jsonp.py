@@ -11,7 +11,11 @@ class JsonpCheck:
         for key, value in dict.items():
             if key in jsonp_args:
                 url1 = get_replaced_url(url, dict[key][0], "aSdfGd")
-                res = requests.get(url1).text
+                res = ""
+                try:
+                    res = requests.get(url1).text
+                except BaseException:
+                    pass
                 if "aSdfGd" in res:
                     print("检测到jsonp接口，探测是否存在劫持风险")
                     headers = {"Referer": "https://www.test.com"}

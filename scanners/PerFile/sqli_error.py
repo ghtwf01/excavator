@@ -63,7 +63,11 @@ class SQLIErrorCheck:
                 for payload in self._payloads:
                     url1 = get_replaced_url(
                         url, dict[key][0], dict[key][0] + payload)
-                    html = requests.get(url1, headers=request.headers).text
+                    html = ""
+                    try:
+                        html = requests.get(url1, headers=request.headers).text
+                    except BaseException:
+                        pass
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print(
@@ -84,8 +88,11 @@ class SQLIErrorCheck:
             if len(value) == 1:
                 for payload in self._payloads:
                     dict[key][0] = dict[key][0] + payload
-                    html = requests.post(
-                        url, data=dict, headers=request.headers).text
+                    html = ""
+                    try:
+                        html = requests.post(url, data=dict, headers=request.headers).text
+                    except BaseException:
+                        pass
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print(
@@ -109,8 +116,11 @@ class SQLIErrorCheck:
             if type(value).__name__ == "str":
                 for payload in self._payloads:
                     dict[key] = dict[key] + payload
-                    html = requests.post(
-                        url, data=json.dumps(dict), headers=request.headers).text
+                    html = ""
+                    try:
+                        html = requests.post(url, data=json.dumps(dict), headers=request.headers).text
+                    except BaseException:
+                        pass
                     res = sensitive_page_error_message_check(html)
                     if len(res) == 1:
                         print(

@@ -73,7 +73,7 @@ class SQLIErrorCheck:
                             res[0]['text'])
                         vuln_print(
                             url1, "sqli", vuln_level["sqli"], request.method)
-                        break
+                        return 0
 
     def check_post_urlencode_error_sqli(self, request):
         url = request.url
@@ -99,7 +99,7 @@ class SQLIErrorCheck:
                             vuln_level["sqli"],
                             request.method,
                             str(dict))
-                        break
+                        return 0
 
     def check_post_json_error_sqli(self, request):
         url = request.url
@@ -124,7 +124,7 @@ class SQLIErrorCheck:
                             vuln_level["sqli"],
                             request.method,
                             body)
-                        break
+                        return 0
 
 # if __name__ == "__main__":
 #     sqli = SQLI()

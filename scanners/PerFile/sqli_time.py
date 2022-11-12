@@ -91,7 +91,7 @@ class SQLITimeCheck:
                                 if res_code == 302:
                                     # print(url1+" 302不检测")
                                     break
-                            except:
+                            except BaseException:
                                 pass
                             end_time = time.time()
                             recheck_payload_time = end_time - start_time
@@ -106,7 +106,7 @@ class SQLITimeCheck:
                                     str(recheck_payload_time))
                                 vuln_print(
                                     url1, "sqli", vuln_level["sqli"], request.method)
-                                break
+                                return 0
 
     def check_post_urlencode_sqli(self, request):
         url = request.url
@@ -149,7 +149,7 @@ class SQLITimeCheck:
                                     str(recheck_payload_time))
                                 vuln_print(
                                     url, "sqli", vuln_level["sqli"], request.method, body)
-                                break
+                                return 0
 
     def check_post_json_sqli(self, request):
         url = request.url
@@ -191,7 +191,7 @@ class SQLITimeCheck:
                                     str(recheck_payload_time))
                                 vuln_print(
                                     url, "sqli", vuln_level["sqli"], request.method, body)
-                                break
+                                return 0
 
 #
 #

@@ -33,7 +33,7 @@ excavator是一款基于mitmproxy的插件式被动安全漏洞扫描器，此�
 - [ ] 远程代码/命令执行检测
 - [ ] 文件上传检测
 - [ ] 越权检测
-- [ ] 通用cve漏洞poc检测
+- [ ] xray/nuclei poc库
 - [ ] 等等
 # 使用方式
 ```python
